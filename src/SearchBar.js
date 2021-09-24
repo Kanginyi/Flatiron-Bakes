@@ -1,6 +1,9 @@
 function SearchBar() {
     return (
-        <h2>Search Bar</h2>
+        <form>
+            <input type="text" placeholder="Cake"></input>
+            <input type="submit"></input>
+        </form>
     );
 }
 

@@ -1,9 +1,9 @@
-function CakeCard({flavor, price, size = 6}) {
+function CakeCard({cake, setSelectedCake}) {
     return (
-        <div>
-            <h1>Flavor: {flavor}</h1>
-            <p>Price: {price}</p>
-            <p>Size: {size}</p>
+        <div onClick={() => setSelectedCake(cake)}>
+            <h1>Flavor: {cake.flavor}</h1>
+            <p>Price: ${cake.price}</p>
+            <p>Size: {cake.size}</p>
         </div>
     );
 }

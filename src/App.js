@@ -1,40 +1,35 @@
 import CakeCard from "./CakeCard";
 import Header from "./Header";
 import SearchBar from "./SearchBar";
-
-const cakes = [
-  {
-      flavor: 'Vanilla',
-      size: '6" cake',
-      price: 40.00
-  },
-  {
-      flavor: 'Raspberry Cardamon Rose',
-      size: '9" cake',
-      price: 50.00
-  },
-  {
-      flavor: 'Pink Champagne',
-      size: 'cup cake',
-      price: 37.5
-  },
-  {
-      flavor: 'Earl Grey',
-      size: 'cup cake',
-      price: 18.00
-  },
-  {
-      flavor: 'Black Forest',
-      price: 18.00
-  }
-];
+import { useState } from "react";
+import cakes from "./cakes";
+import CakeDetail from "./CakeDetail";
+import CakeForm from "./CakeForm";
 
 function App() {
+  const [visible, setVisible] = useState(false);
+  const [selectedCake, setSelectedCake] = useState(null);
+  const [cakeList, setCakes] = useState(cakes);
+
+  function handleAddCake(cake) {
+    setCakes([
+      ...cakeList, cake
+    ])
+  }
+
   return (
     <>
       <Header />
-      <SearchBar />
-      {cakes.map(c => <CakeCard flavor={c.flavor} price={c.price} size={c.size}/>)}
+      <CakeForm handleAddCake={handleAddCake}/>
+      {visible ? <SearchBar /> : null}
+      <br/>
+
+      <button onClick={() => setVisible(!visible)}>{visible ? "x" : "Form"}</button>
+      <br/>
+
+      {selectedCake ? <CakeDetail cake={selectedCake} /> : null}
+
+      {cakeList.map(cake => <CakeCard setSelectedCake={setSelectedCake} cake={cake}/>)}
     </>
   );
 }
